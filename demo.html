@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JQuery Configurator Plugin</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jqconfigurator.js"></script>
+        <style type="text/css">
+
+            .someobj{
+                height:150px;
+                width:500px;
+                border:1px solid #444;
+                margin-bottom: 20px;
+
+            }
+
+            .someobj2{
+                height:200px;
+                width:400px;
+                border:1px solid #444;
+                margin-bottom: 20px;
+                position: absolute;
+                top:300px;
+                left:400px;
+
+            }
+
+            p,h2 {
+                padding:10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>JQuery Configurator Plugin Demo</h1>
+        <p>Add a flexible configuration panel to the top right corner of any DOM element. See the following examples</p>
+        <div class="someobj conf" id="obj1">
+            <h2>Some Beautiful Text</h2>
+            <p>Move your mouse over this fixed container. You will see a menu at the top right corner with some options.</p>
+        </div>
+
+        <div class="someobj2 conf" id="obj2">
+            <h2>Configurator with Icons</h2>
+            <p>Another Div with Absolute Positioning. Hover your mouse to see configurator object at the top right corner</p>
+        </div>
+
+        <script type="text/javascript">
+
+            
+            function spanish(obj){
+                 alert("Will Translate to Spanish");
+            }
+            function french(obj){
+                alert("Will Translate to French");
+            }
+            function english(obj){
+                alert("Will Translate to English");
+            }
+
+            function edit(obj){
+                alert("Edit : "+$(obj).attr("id"));
+            }
+            function save(obj){
+                alert("Saved : "+$(obj).attr("id"));
+            }
+            function del(obj){
+                alert("Saved : "+$(obj).attr("id"));
+            }
+
+            $(document).ready(function(){
+                $(".someobj").jConfigurator({
+                    "width":145,
+                    "backgroundColor":"#F2583E",
+                    "color":"#F7F3E8",
+                    "labels":[
+                        {"name":"translate in es","callback":spanish},
+                        {"name":"fr","callback":french},
+                        {"name":"en","callback":english},
+                    ]
+                });
+                $(".someobj2").jConfigurator({
+                    "width":65,
+                    "separator":"&nbsp;&nbsp;",
+                    "backgroundColor":"#747E80",
+                    "labels":[
+                        {"name":"<img src='images/application_view_tile.png' title='Color' />","callback":save},
+                        {"name":"<img src='images/application_form.png' title='Some Configuration'/>","callback":del},
+                        {"name":"<img src='images/tag_green.png' title='Edit'/>","callback":edit},
+                    ]
+                });
+                //$(".someobj").jConfigurator();
+            });
+        </script>
+        <!--<div class="conf" id="conf">
+            
+        </div>-->
+    </body>
+</html>
