@@ -37,6 +37,7 @@
                          "display":"none"
                      })
                    .bind("mouseover",function(e){$(this).show()})
+                   .bind("mouseout",function(e){$(this).hide()})
                    .appendTo("body");
 
         for(i=0;i<opts.labels.length;i++){
