@@ -21,7 +21,9 @@
             color:"#000",
             border:"1px solid #ccc",
             separator:"&nbsp;|&nbsp;",
-            labels:[]
+            labels:[],
+            mouseoverCallback:jQuery.noop(),
+            mouseoutCallback:jQuery.noop()
         }
         opts = $.extend(defaults, options);
         jid = "jcconf"+Math.floor(Math.random()*110011)
@@ -36,8 +38,8 @@
                          "zIndex":1000,
                          "display":"none"
                      })
-                   .bind("mouseover",function(e){$(this).show()})
-                   .bind("mouseout",function(e){$(this).hide()})
+                   .bind("mouseover",function(e){$(this).show(); if(typeof opts.mouseoverCallback=="function") opts.mouseoverCallback($("#"+jcObj));})
+                   .bind("mouseout",function(e){$(this).hide(); if(typeof opts.mouseoutCallback=="function") opts.mouseoutCallback($("#"+jcObj));})
                    .appendTo("body");
 
         for(i=0;i<opts.labels.length;i++){
@@ -83,16 +85,21 @@
     }
 
     $.fn.jCl = function(e){
-        var activeObj = $("#"+jcObj);
-        jid = $(activeObj).data("jid");
-        e.stopPropagation();
-        $("#"+jid).hide();
-        
-        evt = evts[e.data.caller];
-        if(typeof evt == "function"){
-            evt(activeObj);
-            
+        try{
+            var activeObj = $("#"+jcObj);
+            jid = $(activeObj).data("jid");
+            e.stopPropagation();
+            $("#"+jid).hide();
+
+            evt = evts[e.data.caller];
+            if(typeof evt == "function"){
+                evt(activeObj);
+
+            }
+        }catch(e){
+            alert(e.toSource());
         }
+        
     }
 
 
