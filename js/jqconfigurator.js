@@ -78,10 +78,12 @@
             "left":cleft,
             "top":ctop
         }).show();
+        e.stopPropagation();
     }
     $.fn.jCmo = function(e){
         jid = $(this).data("jid");
         $("#"+jid).hide();
+        e.stopPropagation();
     }
 
     $.fn.jCl = function(e){
